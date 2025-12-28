@@ -10,11 +10,12 @@ h1 {
   color: #333;
 }
 
-input, button {
+input, button#addTaskBtn {
   padding: 10px;
   margin: 5px 0;
   width: 100%;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 ul {
@@ -29,12 +30,23 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 16px;
+  word-break: break-word;
 }
 
 button.deleteBtn {
-  background: red;
+  background: #e74c3c;
   color: white;
   border: none;
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+}
+
+button.deleteBtn:hover {
+  background: #c0392b;
 }
