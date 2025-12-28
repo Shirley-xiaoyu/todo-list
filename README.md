@@ -1,2 +1,2 @@
 # todo-list
-Simple To-Do List Project
+This is a Simple To-Do List Project
