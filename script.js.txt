@@ -1,0 +1,46 @@
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.forEach(task => addTaskToDOM(task));
+}
+
+function saveTask(task) {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function deleteTaskFromStorage(taskText) {
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks = tasks.filter(t => t !== taskText);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function addTaskToDOM(taskText) {
+  const li = document.createElement('li');
+  li.textContent = taskText;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.className = 'deleteBtn';
+  deleteBtn.onclick = () => {
+    taskList.removeChild(li);
+    deleteTaskFromStorage(taskText);
+  };
+
+  li.appendChild(deleteBtn);
+  taskList.appendChild(li);
+}
+
+addTaskBtn.addEventListener('click', () => {
+  const task = taskInput.value.trim();
+  if (task === '') return alert('Please enter a task');
+  addTaskToDOM(task);
+  saveTask(task);
+  taskInput.value = '';
+});
+
+window.onload = loadTasks;
